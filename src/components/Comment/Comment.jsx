@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Avatar } from '../Avatar/Avatar'
 
 import { Trash, ThumbsUp } from 'phosphor-react'
@@ -8,6 +9,13 @@ export function Comment({ content, onDeleteComment }) {
     //HANDLING COMMENTS
     function handleDeleteComment() {
         onDeleteComment(content)
+    }
+
+    //HANDLING LIKES
+    const [likeCount, setLikeCount] = useState(0)
+
+    function handleLikeComment() {
+        setLikeCount(likeCount + 1)
     }
 
     return (
@@ -47,9 +55,11 @@ export function Comment({ content, onDeleteComment }) {
 
                 {/* LIKES SECTION */}
                 <footer>
-                    <button>
-                       <ThumbsUp />
-                        Curtir<span>20</span>
+                    <button
+                        onClick={handleLikeComment}
+                    >
+                        <ThumbsUp />
+                        Curtir<span>{likeCount}</span>
                     </button>
                 </footer>
             </div>
